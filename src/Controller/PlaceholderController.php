@@ -20,6 +20,12 @@ class PlaceholderController extends AbstractController
         
     }
 
+    #[Route('/', methods:['GET'])]
+    public function redirectToImageGenerator()
+    {
+       return $this->redirect('/image');
+    }
+
     #[Route('/image', name: 'app_placeholder')]
     public function create(Request $request)
     {
