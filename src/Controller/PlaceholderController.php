@@ -20,10 +20,13 @@ class PlaceholderController extends AbstractController
         
     }
 
-    #[Route('/width/{width}/height/{height}', name: 'app_placeholder')]
-    public function create($width, $height, Request $request)
+    #[Route('/image', name: 'app_placeholder')]
+    public function create(Request $request)
     {
         try{
+            $width = $request->query->get('width') ? $request->query->get('width') : 100;
+            $height = $request->query->get('height') ? $request->query->get('height') : 100;
+
             return new Response($this->placeholderService->create($width, $height), Response::HTTP_OK, ['Content-type' => 'image/png']);
         }catch(\Throwable $exception){
             return $this->json($exception->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
